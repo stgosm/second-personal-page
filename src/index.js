@@ -1,17 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import CustomThemeProvider from './components/CustomThemeProvider';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-     <CustomThemeProvider>
-        <CssBaseline />
-        <App />
-     </CustomThemeProvider>
+      <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
