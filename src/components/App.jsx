@@ -1,9 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Main from './Main';
-import { Switch, AppBar, Toolbar } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import { Switch, AppBar, Toolbar, IconButton, Grid } from "@material-ui/core";
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { ThemeProvider, CssBaseline, createMuiTheme } from "@material-ui/core";
-import { green } from '@material-ui/core/colors';
+import MenuIcon from '@material-ui/icons/Menu';
+import Brightness5Icon from '@material-ui/icons/Brightness5';
+import Brightness2Icon from '@material-ui/icons/Brightness2';
+import NightsStayIcon from '@material-ui/icons/NightsStay';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,10 +15,72 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  title: {
-    flexGrow: 1,
+  menuToolbar: {
+    display: 'display',
+    justifyContent: 'space-between',
+  },
+  gridTheme: {
+    width: 'auto',
+  },
+  gridItemTheme: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: 0,
   },
 }));
+
+const ThemeSwitch = withStyles((theme) => ({
+  root: {
+    width: 42,
+    height: 26,
+    padding: 0,
+    margin: theme.spacing(1),
+  },
+  switchBase: {
+    padding: 1,
+    '&$checked': {
+      transform: 'translateX(16px)',
+      color: theme.palette.common.white,
+      '& + $track': {
+        backgroundColor: '#607d8b',
+        opacity: 1,
+        border: 'none',
+      },
+    },
+    '&$focusVisible $thumb': {
+      color: '#607d8b',
+      border: '6px solid #fff',
+    },
+  },
+  thumb: {
+    width: 24,
+    height: 24,
+  },
+  track: {
+    borderRadius: 26 / 2,
+    border: `1px solid ${theme.palette.grey[500]}`,
+    backgroundColor: theme.palette.grey[400],
+    opacity: 1,
+    transition: theme.transitions.create(['background-color', 'border']),
+  },
+  checked: {},
+  focusVisible: {},
+}))(({ classes, ...props }) => {
+  return (
+    <Switch
+      focusVisibleClassName={classes.focusVisible}
+      disableRipple
+      classes={{
+        root: classes.root,
+        switchBase: classes.switchBase,
+        thumb: classes.thumb,
+        track: classes.track,
+        checked: classes.checked,
+      }}
+      {...props}
+    />
+  );
+});
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -28,7 +93,7 @@ function App() {
         main: "#424242",
       },
       secondary: {
-        main: "#78909c",
+        main: "#eceff1",
       },
     }
   });
@@ -37,22 +102,31 @@ function App() {
     palette: {
       type: "light",
       primary: {
-        main: "#eeeeee"
+        main: "#37474f",
+      },
+      secondary: {
+        main: "#455a64"
       },
     }
   });
 
   return (
     <>
-      
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
           <CssBaseline/>
           <AppBar position="static" color="primary">
-            <Toolbar>
-              <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)}/>
+            <Toolbar className={classes.menuToolbar}>
+              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                <MenuIcon />
+              </IconButton>
+              <Grid component="label" container className={classes.gridTheme} alignItems="center" >
+                <Grid item className={classes.gridItemTheme}><Brightness5Icon style={{ fontSize: 20 }} /></Grid>
+                <Grid item className={classes.gridItemTheme}><ThemeSwitch checked={darkMode} onChange={() => setDarkMode(!darkMode)}/></Grid>
+                <Grid item className={classes.gridItemTheme}><NightsStayIcon style={{ fontSize: 20 }} /></Grid>
+              </Grid>
             </Toolbar>
           </AppBar>
-        <Main/>
+          <Main/>
       </ThemeProvider>
     </>
   );
