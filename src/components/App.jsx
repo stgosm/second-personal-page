@@ -4,8 +4,7 @@ import { Switch, AppBar, Toolbar, IconButton, Grid } from "@material-ui/core";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { ThemeProvider, CssBaseline, createMuiTheme } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
-import Brightness5Icon from '@material-ui/icons/Brightness5';
-import Brightness2Icon from '@material-ui/icons/Brightness2';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
 import NightsStayIcon from '@material-ui/icons/NightsStay';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuToolbar: {
     display: 'display',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   gridTheme: {
     width: 'auto',
@@ -116,11 +115,8 @@ function App() {
           <CssBaseline/>
           <AppBar position="static" color="primary">
             <Toolbar className={classes.menuToolbar}>
-              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                <MenuIcon />
-              </IconButton>
               <Grid component="label" container className={classes.gridTheme} alignItems="center" >
-                <Grid item className={classes.gridItemTheme}><Brightness5Icon style={{ fontSize: 20 }} /></Grid>
+                <Grid item className={classes.gridItemTheme}><Brightness7Icon style={{ fontSize: 20 }} /></Grid>
                 <Grid item className={classes.gridItemTheme}><ThemeSwitch checked={darkMode} onChange={() => setDarkMode(!darkMode)}/></Grid>
                 <Grid item className={classes.gridItemTheme}><NightsStayIcon style={{ fontSize: 20 }} /></Grid>
               </Grid>
