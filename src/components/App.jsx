@@ -115,6 +115,9 @@ function App() {
           <CssBaseline/>
           <AppBar position="static" color="primary">
             <Toolbar className={classes.menuToolbar}>
+              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                <MenuIcon />
+              </IconButton>
               <Grid component="label" container className={classes.gridTheme} alignItems="center" >
                 <Grid item className={classes.gridItemTheme}><Brightness7Icon style={{ fontSize: 20 }} /></Grid>
                 <Grid item className={classes.gridItemTheme}><ThemeSwitch checked={darkMode} onChange={() => setDarkMode(!darkMode)}/></Grid>
